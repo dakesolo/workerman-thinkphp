@@ -18,16 +18,13 @@ return [
     'host'                  => '0.0.0.0', // 监听地址
     //'host'                  => '127.0.0.1', // 监听地址
     'port'                  => 5001, // 监听端口
-    'root'                  => '', // WEB 根目录 默认会定位public目录
-    'app_path'              => '', // 应用目录 守护进程模式必须设置（绝对路径）
     'file_monitor'          => true, // 是否开启PHP文件更改监控（调试模式下自动开启）
     'file_monitor_interval' => 1, // 文件监控检测时间间隔（秒）
     'file_monitor_path'     => [Env::get('app_path')] , // 文件监控目录 默认监控application和config目录
 
     // 支持workerman的所有配置参数
-    'name'                  => 'tool/http',
+    'name'                  => 'http',
     'count'                 => 4,
-    'daemonize'             => false,
     'pidFile'               => Env::get('runtime_path') . 'worker.pid',
     'logFile'               => Env::get('runtime_path') . 'http_log.log',
     'stdoutFile'               => Env::get('runtime_path') . 'http_stdout.log'

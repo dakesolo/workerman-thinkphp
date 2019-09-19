@@ -2,12 +2,12 @@
 
 
 namespace app\core;
+use app\common\Timer;
 use app\core\cache\Redis;
 use app\core\constant\Code;
 use app\core\entity\Result;
 use app\core\exception\AppException;
 
-use think\facade\Config;
 use Workerman\Worker;
 
 

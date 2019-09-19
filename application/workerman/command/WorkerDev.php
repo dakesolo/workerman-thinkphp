@@ -97,8 +97,8 @@ class WorkerDev extends Command
         //第五步，onMessage
         $worker->onMessage = function($connection)
         {
-            ob_start();
-            $connection->send(Run::server($connection));
+            ob_clean();
+            $connection->send(Run::server($connection).ob_get_contents());
         };
         //unset($this->config);
         HttpWorker::runAll();
