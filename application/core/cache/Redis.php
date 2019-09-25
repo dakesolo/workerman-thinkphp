@@ -3,7 +3,6 @@
 
 namespace app\core\cache;
 
-use Redis as Redis_Core;
 use think\facade\Config;
 
 class Redis
@@ -16,7 +15,7 @@ class Redis
      */
     public static function init() {
         $config = Config::pull('cache');
-        self::$redis = new Redis_Core();
+        self::$redis = new \Redis();
         self::$redis->pconnect($config['host'], $config['port']);
         self::$redis->_prefix($config['host']);
     }
@@ -25,7 +24,7 @@ class Redis
      * 使用
      */
     public static function action() {
-        if(empty($redis)) {
+        if(empty(self::$redis)) {
             self::init();
             return self::$redis;
         }
