@@ -13,7 +13,7 @@ class Base extends Model
     protected function initialize()
     {
         //TODO:初始化内容
-        $config1 = Current::get()->getConfig('database');
+        /*$config1 = Current::get()->getConfig('database');
         $config2 = Current::get()->getService_DB(Current::get()->getModule().'/'.$config1['serviceIcon']);
         $config = [
             // 数据库类型
@@ -66,7 +66,7 @@ class Base extends Model
             'prefix'=>'a_',
             // 是否需要断线重连
             'break_reconnect' => true,
-        ];
-        Db::init($config);
+        ];*/
+        //Db::init($config);
     }
 }

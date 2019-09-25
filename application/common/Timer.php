@@ -33,8 +33,7 @@ class Timer
     public function add()
     {
         if($this->worker->id === 0) {
-            WorkerTimer::add(1, function()
-            {
+            WorkerTimer::add(1, function(){
 
             }, true);
         }
