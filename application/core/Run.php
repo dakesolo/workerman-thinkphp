@@ -4,10 +4,11 @@
 namespace app\core;
 use app\common\Timer;
 use app\core\cache\Redis;
+use think\Db;
 use app\core\constant\Code;
 use app\core\entity\Result;
 use app\core\exception\AppException;
-
+use think\facade\Config;
 use Workerman\Worker;
 
 
@@ -18,7 +19,13 @@ class Run
      * @param Worker $worker
      */
     public static function init(Worker $worker) {
+        //初始化redis
         Redis::init();
+
+        //初始化数据库
+        Db::init(Config::get('database.'));
+
+        //初始化定时器
         Timer::init($worker);
     }
 
@@ -34,12 +41,11 @@ class Run
         try {
             //第一步，得到参数,$module,$controller,$action
             $pathinfo = ltrim(strpos($_SERVER['REQUEST_URI'], '?') ? strstr($_SERVER['REQUEST_URI'], '?', true) : $_SERVER['REQUEST_URI'], '/');
-            if($pathinfo == '') {
-                $module = 'index';
-                $controller = 'Index';
-                $action = 'index';
-            }
-            else {
+
+            $module =  Config::get('default_module');
+            $controller = Config::get('default_controller');
+            $action = Config::get('default_action');
+            if($pathinfo != '') {
                 $paths = explode('/', $pathinfo);
                 $count = count($paths);
                 if($count == 3) {
@@ -54,6 +60,10 @@ class Run
                     $controller = 'Index';
                     $action = $pathinfo;
                 }
+            }
+
+            if(in_array($module, Config::get('deny_module_list'))) {
+                throw new AppException(Code::ERROR_SYSTEM, 'deny_module');
             }
 
 
