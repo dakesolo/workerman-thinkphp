@@ -9,11 +9,19 @@
 
 namespace app\index\http;
 
+use app\core\cache\Redis;
 use app\core\controller\Http;
+use think\Db;
 
 class Index extends Http
 {
     public function index() {
-        return 'hello world';
+        Redis::action()->set('x', 'asdf');
+        return Redis::action()->get('x');
+    }
+
+    public function db() {
+        dump(Db::name('user')->where('userID',1)->select());
+        return '';
     }
 }
