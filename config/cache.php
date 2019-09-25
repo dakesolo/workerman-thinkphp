@@ -24,14 +24,14 @@ return [
     // 缓存有效期 0表示永久缓存
     'expire' => 0,
     */
-    'type'=>'redis',
-    'host'       => '172.17.0.1',
-    'port'       => 6379,
+    'type'=>env('cache.type'),
+    'host'       => env('cache.host'),
+    'port'       => env('cache.port'),
     'password'   => '',
     'select'     => 0,
     'timeout'    => 0,
     'expire'     => 0,
     'persistent' => true,
-    'prefix'     => 'sms_',
+    'prefix'     =>  env('cache.prefix'),
     /*'serialize'  => true,*/
 ];

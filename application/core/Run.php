@@ -61,7 +61,7 @@ class Run
                     $action = $pathinfo;
                 }
             }
-
+            //dump(Config::get('deny_module_list'));
             if(in_array($module, Config::get('deny_module_list'))) {
                 throw new AppException(Code::ERROR_SYSTEM, 'deny_module');
             }
