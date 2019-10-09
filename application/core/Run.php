@@ -20,10 +20,10 @@ class Run
      */
     public static function init(Worker $worker) {
         //初始化redis
-        Redis::init();
+        //Redis::init();
 
         //初始化数据库
-        Db::init(Config::get('database.'));
+        //Db::init(Config::get('database.'));
 
         //初始化定时器
         Timer::init($worker);
@@ -59,6 +59,11 @@ class Run
                     $module = 'index';
                     $controller = 'Index';
                     $action = $pathinfo;
+                }
+                if($count == 0) {
+                    $module = 'index';
+                    $controller = 'Index';
+                    $action = 'index';
                 }
             }
             //dump(Config::get('deny_module_list'));
